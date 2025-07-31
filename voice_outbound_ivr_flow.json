@@ -1,0 +1,239 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "9df9edbb-83ff-42bf-8bac-35353b0de924",
+  "Metadata": {
+    "entryPointPosition": {
+      "x": 40,
+      "y": 40
+    },
+    "ActionMetadata": {
+      "9df9edbb-83ff-42bf-8bac-35353b0de924": {
+        "position": {
+          "x": 280,
+          "y": 0
+        }
+      },
+      "99cfd10a-d0da-4b7b-b51a-f7954e4c5000": {
+        "position": {
+          "x": 1120,
+          "y": 0
+        }
+      },
+      "4304c9b9-2515-4bcc-9ee9-f507691fcd07": {
+        "position": {
+          "x": 1400,
+          "y": 260
+        }
+      },
+      "4a58c60b-dfa7-4540-845f-215520b92d68": {
+        "position": {
+          "x": 280,
+          "y": 260
+        }
+      },
+      "87d3854b-9525-4a1f-9c07-fc44d1715024": {
+        "position": {
+          "x": 280,
+          "y": 520
+        },
+        "parameters": {
+          "TextToSpeechVoice": {
+            "languageCode": "cmn-CN"
+          }
+        },
+        "overrideConsoleVoice": true
+      },
+      "239b2236-78dd-4678-b601-7a08ebbe4ed2": {
+        "position": {
+          "x": 840,
+          "y": 0
+        },
+        "conditionMetadata": [
+          {
+            "id": "c449849c-d0fd-4543-aba5-05834e1ba74d",
+            "value": "1"
+          },
+          {
+            "id": "828ffbf1-c50c-482b-bb2b-70b228000ba2",
+            "value": "2"
+          }
+        ]
+      },
+      "bdc927da-1fa6-4979-bb51-464227a571c4": {
+        "position": {
+          "x": 560,
+          "y": 0
+        },
+        "parameters": {
+          "Attributes": {
+            "UserName": {
+              "useDynamic": true
+            },
+            "Language": {
+              "useDynamic": true
+            }
+          }
+        },
+        "dynamicParams": [
+          "UserName",
+          "Language"
+        ]
+      },
+      "ff374a8c-15ec-4965-be2d-c1679b6e5435": {
+        "position": {
+          "x": 560,
+          "y": 260
+        }
+      }
+    },
+    "Annotations": [],
+    "name": "StartOutboundVoiceContact IVR Flow",
+    "description": "还款通知",
+    "type": "contactFlow",
+    "status": "published",
+    "hash": {}
+  },
+  "Actions": [
+    {
+      "Parameters": {
+        "FlowLoggingBehavior": "Enabled"
+      },
+      "Identifier": "9df9edbb-83ff-42bf-8bac-35353b0de924",
+      "Type": "UpdateFlowLoggingBehavior",
+      "Transitions": {
+        "NextAction": "4a58c60b-dfa7-4540-845f-215520b92d68"
+      }
+    },
+    {
+      "Parameters": {
+        "Text": "好的，我们会在今天晚上8点之后进行核对。谢谢。"
+      },
+      "Identifier": "99cfd10a-d0da-4b7b-b51a-f7954e4c5000",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "4304c9b9-2515-4bcc-9ee9-f507691fcd07",
+        "Errors": [
+          {
+            "NextAction": "4304c9b9-2515-4bcc-9ee9-f507691fcd07",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "4304c9b9-2515-4bcc-9ee9-f507691fcd07",
+      "Type": "DisconnectParticipant",
+      "Transitions": {}
+    },
+    {
+      "Parameters": {
+        "RecordingBehavior": {
+          "RecordedParticipants": [
+            "Agent",
+            "Customer"
+          ]
+        }
+      },
+      "Identifier": "4a58c60b-dfa7-4540-845f-215520b92d68",
+      "Type": "UpdateContactRecordingBehavior",
+      "Transitions": {
+        "NextAction": "87d3854b-9525-4a1f-9c07-fc44d1715024"
+      }
+    },
+    {
+      "Parameters": {
+        "TextToSpeechVoice": "Zhiyu",
+        "TextToSpeechEngine": "Neural",
+        "TextToSpeechStyle": "None"
+      },
+      "Identifier": "87d3854b-9525-4a1f-9c07-fc44d1715024",
+      "Type": "UpdateContactTextToSpeechVoice",
+      "Transitions": {
+        "NextAction": "bdc927da-1fa6-4979-bb51-464227a571c4"
+      }
+    },
+    {
+      "Parameters": {
+        "StoreInput": "False",
+        "InputTimeLimitSeconds": "180",
+        "Text": "可以请按1，不可以请按2或挂机，谢谢。根据征信业管理条例的规定，某某金融将如实上报您的逾期信息至金融信用信息基础数据库。如您已还款请忽略，谢谢。"
+      },
+      "Identifier": "239b2236-78dd-4678-b601-7a08ebbe4ed2",
+      "Type": "GetParticipantInput",
+      "Transitions": {
+        "NextAction": "4304c9b9-2515-4bcc-9ee9-f507691fcd07",
+        "Conditions": [
+          {
+            "NextAction": "99cfd10a-d0da-4b7b-b51a-f7954e4c5000",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "1"
+              ]
+            }
+          },
+          {
+            "NextAction": "4304c9b9-2515-4bcc-9ee9-f507691fcd07",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "2"
+              ]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "4304c9b9-2515-4bcc-9ee9-f507691fcd07",
+            "ErrorType": "InputTimeLimitExceeded"
+          },
+          {
+            "NextAction": "4304c9b9-2515-4bcc-9ee9-f507691fcd07",
+            "ErrorType": "NoMatchingCondition"
+          },
+          {
+            "NextAction": "4304c9b9-2515-4bcc-9ee9-f507691fcd07",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "UserName": "$.Attributes.UserName",
+          "Language": "$.Attributes.Language"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "bdc927da-1fa6-4979-bb51-464227a571c4",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "ff374a8c-15ec-4965-be2d-c1679b6e5435",
+        "Errors": [
+          {
+            "NextAction": "ff374a8c-15ec-4965-be2d-c1679b6e5435",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "SSML": "<speak><break time=\"3s\"/>尊敬的$.Attributes.UserName，您好，您于2025年7月1日在某某金融申请的贷款总金额为50000元。第一期还款日8月1日已经逾期，还款金额4478.67元，最低还款金额为447.87元。请问您是否可以在今天晚上8点之前还款？有任何问题可以回拨我们的热线号码<say-as interpret-as='digits'>8778422670</say-as></speak>"
+      },
+      "Identifier": "ff374a8c-15ec-4965-be2d-c1679b6e5435",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "239b2236-78dd-4678-b601-7a08ebbe4ed2",
+        "Errors": [
+          {
+            "NextAction": "239b2236-78dd-4678-b601-7a08ebbe4ed2",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    }
+  ]
+}
