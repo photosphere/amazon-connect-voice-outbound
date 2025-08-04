@@ -1,0 +1,494 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "5084e643-e212-425b-8fc4-3543c2e09242",
+  "Metadata": {
+    "entryPointPosition": {
+      "x": -820,
+      "y": -660
+    },
+    "ActionMetadata": {
+      "2371d9c3-88eb-4262-a8ce-40ae1ecab2ad": {
+        "position": {
+          "x": -280,
+          "y": -780
+        }
+      },
+      "5084e643-e212-425b-8fc4-3543c2e09242": {
+        "position": {
+          "x": -560,
+          "y": -780
+        }
+      },
+      "bfb36b28-3934-434d-acd6-de42f9002e23": {
+        "position": {
+          "x": 0,
+          "y": -780
+        },
+        "children": [
+          "5eca0018-1190-4e09-b6f4-662c4c892fd0"
+        ],
+        "parameters": {
+          "TextToSpeechVoice": {
+            "languageCode": "cmn-CN"
+          }
+        },
+        "overrideConsoleVoice": true,
+        "fragments": {
+          "SetContactData": "5eca0018-1190-4e09-b6f4-662c4c892fd0"
+        },
+        "overrideLanguageAttribute": true
+      },
+      "5eca0018-1190-4e09-b6f4-662c4c892fd0": {
+        "position": {
+          "x": 0,
+          "y": -780
+        },
+        "dynamicParams": []
+      },
+      "58ae6259-87a7-41fd-84ed-4c524847cbcc": {
+        "position": {
+          "x": -560,
+          "y": -520
+        },
+        "parameters": {
+          "QueueId": {
+            "displayName": "BasicQueue"
+          }
+        },
+        "queue": {
+          "text": "BasicQueue"
+        }
+      },
+      "a3bf674e-dafa-4736-af19-d0b8c1c6c6a7": {
+        "position": {
+          "x": -560,
+          "y": -260
+        }
+      },
+      "62262eeb-b890-4799-a6a3-7f8917eaf796": {
+        "position": {
+          "x": -280,
+          "y": -520
+        }
+      },
+      "8e91ef12-6283-44b4-8888-393ef1f3faed": {
+        "position": {
+          "x": 560,
+          "y": -520
+        }
+      },
+      "b9362d6b-eb16-42c9-8184-256617a71588": {
+        "position": {
+          "x": 840,
+          "y": -260
+        }
+      },
+      "2badefc0-ae32-4707-9080-59bdc0fd2ae3": {
+        "position": {
+          "x": 1120,
+          "y": 0
+        }
+      },
+      "ef07235d-43c7-4fe9-96e8-8d7219902cb8": {
+        "position": {
+          "x": 280,
+          "y": 260
+        }
+      },
+      "27bbb372-81e3-467c-bc2f-125f51215fd7": {
+        "position": {
+          "x": 560,
+          "y": 0
+        }
+      },
+      "445f3b71-7789-4917-b15c-c51f94c0c060": {
+        "position": {
+          "x": 840,
+          "y": 260
+        }
+      },
+      "2121535b-514b-44a4-8b2a-5d81c93bced8": {
+        "position": {
+          "x": -280,
+          "y": -260
+        },
+        "parameters": {
+          "LanguageCode": {
+            "useDynamic": true
+          }
+        },
+        "dynamicParams": [
+          "languageCode"
+        ]
+      },
+      "93f5e521-9ba8-4cb9-8aca-ea08ec2c2008": {
+        "position": {
+          "x": 0,
+          "y": -260
+        },
+        "parameters": {
+          "SSML": {
+            "useDynamic": true
+          },
+          "LexV2Bot": {
+            "AliasArn": {
+              "useLexBotDropdown": false
+            }
+          },
+          "LexTimeoutSeconds": {
+            "Text": {
+              "unit": 3600
+            }
+          }
+        },
+        "dynamicMetadata": {
+          "x-amz-lex:audio:start-timeout-ms:*:*": false
+        },
+        "lexV2BotName": "",
+        "useDynamic": true,
+        "conditionMetadata": [
+          {
+            "id": "e0a6f069-d20b-4409-b57f-0eb99b89d564",
+            "operator": {
+              "name": "Equals",
+              "value": "Equals",
+              "shortDisplay": "="
+            },
+            "value": "TransferToAgentIntent"
+          },
+          {
+            "id": "87064210-7d57-4670-a87d-43cb016aaf1b",
+            "operator": {
+              "name": "Equals",
+              "value": "Equals",
+              "shortDisplay": "="
+            },
+            "value": "CloseIntent"
+          }
+        ]
+      },
+      "5572717b-dcd3-4a84-94c8-9424edeb477f": {
+        "position": {
+          "x": -280,
+          "y": 0
+        }
+      }
+    },
+    "Annotations": [],
+    "name": "StartOutboundVoiceContact Bedrock Flow",
+    "description": "Lex  - StartOutboundVoiceContact_DebtCollection_Bot",
+    "type": "contactFlow",
+    "status": "published",
+    "hash": {}
+  },
+  "Actions": [
+    {
+      "Parameters": {
+        "RecordingBehavior": {
+          "RecordedParticipants": [
+            "Agent",
+            "Customer"
+          ],
+          "IVRRecordingBehavior": "Enabled"
+        },
+        "AnalyticsBehavior": {
+          "Enabled": "True",
+          "AnalyticsLanguage": "zh-CN",
+          "AnalyticsRedactionBehavior": "Disabled",
+          "AnalyticsRedactionResults": "None",
+          "ChannelConfiguration": {
+            "Chat": {
+              "AnalyticsModes": []
+            },
+            "Voice": {
+              "AnalyticsModes": [
+                "PostContact"
+              ]
+            }
+          },
+          "SummaryConfiguration": {
+            "SummaryModes": [
+              "PostContact"
+            ]
+          },
+          "SentimentConfiguration": {
+            "Enabled": "True"
+          }
+        }
+      },
+      "Identifier": "2371d9c3-88eb-4262-a8ce-40ae1ecab2ad",
+      "Type": "UpdateContactRecordingBehavior",
+      "Transitions": {
+        "NextAction": "bfb36b28-3934-434d-acd6-de42f9002e23"
+      }
+    },
+    {
+      "Parameters": {
+        "FlowLoggingBehavior": "Enabled"
+      },
+      "Identifier": "5084e643-e212-425b-8fc4-3543c2e09242",
+      "Type": "UpdateFlowLoggingBehavior",
+      "Transitions": {
+        "NextAction": "2371d9c3-88eb-4262-a8ce-40ae1ecab2ad"
+      }
+    },
+    {
+      "Parameters": {
+        "TextToSpeechVoice": "Zhiyu",
+        "TextToSpeechEngine": "Neural",
+        "TextToSpeechStyle": "None"
+      },
+      "Identifier": "bfb36b28-3934-434d-acd6-de42f9002e23",
+      "Type": "UpdateContactTextToSpeechVoice",
+      "Transitions": {
+        "NextAction": "5eca0018-1190-4e09-b6f4-662c4c892fd0",
+        "Errors": [
+          {
+            "NextAction": "58ae6259-87a7-41fd-84ed-4c524847cbcc",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "LanguageCode": "cmn-CN"
+      },
+      "Identifier": "5eca0018-1190-4e09-b6f4-662c4c892fd0",
+      "Type": "UpdateContactData",
+      "Transitions": {
+        "NextAction": "58ae6259-87a7-41fd-84ed-4c524847cbcc",
+        "Errors": [
+          {
+            "NextAction": "58ae6259-87a7-41fd-84ed-4c524847cbcc",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:991727053196:instance/b7e4b4ed-1bdf-4b14-b624-d9328f08725a/queue/cc9cc2ae-3b36-4cbb-8ba3-a1e6d6880781"
+      },
+      "Identifier": "58ae6259-87a7-41fd-84ed-4c524847cbcc",
+      "Type": "UpdateContactTargetQueue",
+      "Transitions": {
+        "NextAction": "a3bf674e-dafa-4736-af19-d0b8c1c6c6a7",
+        "Errors": [
+          {
+            "NextAction": "a3bf674e-dafa-4736-af19-d0b8c1c6c6a7",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "SSML": "<speak><break time=\"4s\"/></speak>"
+      },
+      "Identifier": "a3bf674e-dafa-4736-af19-d0b8c1c6c6a7",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "62262eeb-b890-4799-a6a3-7f8917eaf796",
+        "Errors": [
+          {
+            "NextAction": "62262eeb-b890-4799-a6a3-7f8917eaf796",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "FlowAttributes": {
+          "welcome_msg": {
+            "Value": "<speak><break time=\"3s\"/>您好，请问您是$.Attributes.UserName吗？</speak>"
+          }
+        }
+      },
+      "Identifier": "62262eeb-b890-4799-a6a3-7f8917eaf796",
+      "Type": "UpdateFlowAttributes",
+      "Transitions": {
+        "NextAction": "2121535b-514b-44a4-8b2a-5d81c93bced8",
+        "Errors": [
+          {
+            "NextAction": "2121535b-514b-44a4-8b2a-5d81c93bced8",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Text": "好的，我们的客服代表正在接听您的电话。请您耐心等待。"
+      },
+      "Identifier": "8e91ef12-6283-44b4-8888-393ef1f3faed",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "b9362d6b-eb16-42c9-8184-256617a71588",
+        "Errors": [
+          {
+            "NextAction": "b9362d6b-eb16-42c9-8184-256617a71588",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "b9362d6b-eb16-42c9-8184-256617a71588",
+      "Type": "TransferContactToQueue",
+      "Transitions": {
+        "NextAction": "2badefc0-ae32-4707-9080-59bdc0fd2ae3",
+        "Errors": [
+          {
+            "NextAction": "2badefc0-ae32-4707-9080-59bdc0fd2ae3",
+            "ErrorType": "QueueAtCapacity"
+          },
+          {
+            "NextAction": "2badefc0-ae32-4707-9080-59bdc0fd2ae3",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "2badefc0-ae32-4707-9080-59bdc0fd2ae3",
+      "Type": "DisconnectParticipant",
+      "Transitions": {}
+    },
+    {
+      "Parameters": {
+        "FlowAttributes": {
+          "welcome_msg": {
+            "Value": "<speak></speak>"
+          }
+        }
+      },
+      "Identifier": "ef07235d-43c7-4fe9-96e8-8d7219902cb8",
+      "Type": "UpdateFlowAttributes",
+      "Transitions": {
+        "NextAction": "93f5e521-9ba8-4cb9-8aca-ea08ec2c2008",
+        "Errors": [
+          {
+            "NextAction": "93f5e521-9ba8-4cb9-8aca-ea08ec2c2008",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Text": "好的，再次感谢您的接听。祝您生活愉快。"
+      },
+      "Identifier": "27bbb372-81e3-467c-bc2f-125f51215fd7",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "445f3b71-7789-4917-b15c-c51f94c0c060",
+        "Errors": [
+          {
+            "NextAction": "445f3b71-7789-4917-b15c-c51f94c0c060",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "445f3b71-7789-4917-b15c-c51f94c0c060",
+      "Type": "DisconnectParticipant",
+      "Transitions": {}
+    },
+    {
+      "Parameters": {
+        "TargetContact": "Current",
+        "LanguageCode": "$.Attributes.LanguageCode"
+      },
+      "Identifier": "2121535b-514b-44a4-8b2a-5d81c93bced8",
+      "Type": "UpdateContactData",
+      "Transitions": {
+        "NextAction": "5572717b-dcd3-4a84-94c8-9424edeb477f",
+        "Errors": [
+          {
+            "NextAction": "5572717b-dcd3-4a84-94c8-9424edeb477f",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "SSML": "$.FlowAttributes.welcome_msg",
+        "LexV2Bot": {
+          "AliasArn": "arn:aws:lex:us-east-1:991727053196:bot-alias/Q2Y8ZIPP3Q/TSTALIASID"
+        },
+        "LexSessionAttributes": {
+          "x-amz-lex:audio:start-timeout-ms:*:*": "5000"
+        },
+        "LexTimeoutSeconds": {
+          "Text": "7200"
+        }
+      },
+      "Identifier": "93f5e521-9ba8-4cb9-8aca-ea08ec2c2008",
+      "Type": "ConnectParticipantWithLexBot",
+      "Transitions": {
+        "NextAction": "445f3b71-7789-4917-b15c-c51f94c0c060",
+        "Conditions": [
+          {
+            "NextAction": "8e91ef12-6283-44b4-8888-393ef1f3faed",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "TransferToAgentIntent"
+              ]
+            }
+          },
+          {
+            "NextAction": "27bbb372-81e3-467c-bc2f-125f51215fd7",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "CloseIntent"
+              ]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "ef07235d-43c7-4fe9-96e8-8d7219902cb8",
+            "ErrorType": "InputTimeLimitExceeded"
+          },
+          {
+            "NextAction": "ef07235d-43c7-4fe9-96e8-8d7219902cb8",
+            "ErrorType": "NoMatchingCondition"
+          },
+          {
+            "NextAction": "445f3b71-7789-4917-b15c-c51f94c0c060",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "FlowAttributes": {
+          "welcome_msg": {
+            "Value": "<speak>请问是$.Attributes.UserName 吗?</speak>"
+          }
+        }
+      },
+      "Identifier": "5572717b-dcd3-4a84-94c8-9424edeb477f",
+      "Type": "UpdateFlowAttributes",
+      "Transitions": {
+        "NextAction": "93f5e521-9ba8-4cb9-8aca-ea08ec2c2008",
+        "Errors": [
+          {
+            "NextAction": "93f5e521-9ba8-4cb9-8aca-ea08ec2c2008",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    }
+  ]
+}

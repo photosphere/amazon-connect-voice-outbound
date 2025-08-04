@@ -60,7 +60,7 @@ with st.form("outbound_form"):
     # 配置项折叠
     with st.expander("配置项", expanded=False):
         connect_instance_id = st.text_input("Connect实例ID", placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",value="b7e4b4ed-1bdf-4b14-b624-d9328f08725a")
-        contact_flow_id = st.text_input("联系流ID", placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",value="9168f50a-d81e-4060-a2cb-a127fe3d9198")
+        contact_flow_id = st.text_input("联系流ID", placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",value="09d9d254-9055-43d6-a52e-1687290ae4db")
         source_phone_number = st.text_input("源电话号码（可选）", placeholder="+1234567890",value="+13072633584")
     
     # 外呼按钮
