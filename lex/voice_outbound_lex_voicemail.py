@@ -67,9 +67,6 @@ with st.form("outbound_form"):
         connect_instance_id = st.text_input("Connect实例ID", placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",value="31d131ac-b62a-4c16-a720-1154c8ddb841")
         contact_flow_id = st.text_input("联系流ID", placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",value="e5b39750-8132-44e0-adfb-be0ed7eb2d51")
         source_phone_number = st.text_input("源电话号码（可选）", placeholder="+1234567890",value="+525552321084")
-        now = datetime.now(timezone.utc)
-        default_s3_path = f"s3://financetest0514/ctr-base/year={now.year}/month={now.month}/day={now.day}/"
-        ctr_s3_bucket = st.text_input("通话记录存储桶", value=default_s3_path)
     
     # 外呼按钮
     if st.form_submit_button("外呼"):
@@ -115,7 +112,7 @@ if st.button("更新"):
                 ContactId=st.session_state.contact_id
             )
             
-            st.write(response)
+            ##st.write(response)
             
             contact = response['Contact']
             
@@ -138,9 +135,9 @@ if st.button("更新"):
                 names.append("DisconnectTimestamp")
                 values.append(contact['DisconnectTimestamp'].strftime('%Y-%m-%dT%H:%M:%SZ'))
             
-            if 'DisconnectDetails' in contact and 'PotentialDisconnectIssue' in contact['DisconnectDetails']:
+            if 'DisconnectReason' in contact:
                 names.append("DisconnectReason")
-                values.append(contact['DisconnectDetails']['PotentialDisconnectIssue'])
+                values.append(contact['DisconnectReason'])
             
             if 'Attributes' in contact and 'amd_result' in contact['Attributes']:
                 names.append("amd_result")
@@ -153,3 +150,16 @@ if st.button("更新"):
             st.error(f"更新失败: {str(e)}")
     else:
         st.warning("请先执行外呼操作")
+
+if st.button("加载通话"):
+    if 'contact_id' in st.session_state:
+        try:
+                connect_client = boto3.client('connect')
+                response = connect_client.describe_contact(
+                    InstanceId=st.session_state.connect_instance_id,
+                    ContactId=st.session_state.contact_id
+                )
+                
+                st.write(response)
+        except Exception as e:
+                st.error(f"加载失败: {str(e)}")
