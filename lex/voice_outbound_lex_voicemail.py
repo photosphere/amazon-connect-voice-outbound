@@ -88,18 +88,15 @@ with st.form("outbound_form"):
                     source_phone_number=source_phone_number if source_phone_number else None
                 )
                 st.success("外呼成功！")
-                start_time_utc = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
+                start_time_local = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 contact_id = response['ContactId']
                 
-                if 'df' not in st.session_state:
-                    st.session_state.df = pd.DataFrame({
-                        "Name": ["ContactId", "StartTime"],
-                        "Value": [contact_id, start_time_utc]
-                    })
-                    st.session_state.contact_id = contact_id
-                    st.session_state.connect_instance_id = connect_instance_id
-                
-                st.dataframe(st.session_state.df, hide_index=True)
+                st.session_state.df = pd.DataFrame({
+                    "Name": ["ContactId", "StartTime"],
+                    "Value": [contact_id, start_time_local]
+                })
+                st.session_state.contact_id = contact_id
+                st.session_state.connect_instance_id = connect_instance_id
             except Exception as e:
                 st.error(f"外呼失败: {str(e)}")
 
@@ -112,8 +109,6 @@ if st.button("更新"):
                 ContactId=st.session_state.contact_id
             )
             
-            ##st.write(response)
-            
             contact = response['Contact']
             
             names = ["ContactId", "StartTime"]
@@ -121,19 +116,23 @@ if st.button("更新"):
             
             if 'InitiationTimestamp' in contact:
                 names.append("InitiationTimestamp")
-                values.append(contact['InitiationTimestamp'].strftime('%Y-%m-%dT%H:%M:%SZ'))
+                local_time = contact['InitiationTimestamp'].astimezone()
+                values.append(local_time.strftime('%Y-%m-%d %H:%M:%S'))
             
             if 'ConnectedToSystemTimestamp' in contact:
                 names.append("ConnectedToSystemTimestamp")
-                values.append(contact['ConnectedToSystemTimestamp'].strftime('%Y-%m-%dT%H:%M:%SZ'))
+                local_time = contact['ConnectedToSystemTimestamp'].astimezone()
+                values.append(local_time.strftime('%Y-%m-%d %H:%M:%S'))
             
             if 'AgentInfo' in contact and 'ConnectedToAgentTimestamp' in contact['AgentInfo']:
                 names.append("ConnectedToAgentTimestamp")
-                values.append(contact['AgentInfo']['ConnectedToAgentTimestamp'].strftime('%Y-%m-%dT%H:%M:%SZ'))
+                local_time = contact['AgentInfo']['ConnectedToAgentTimestamp'].astimezone()
+                values.append(local_time.strftime('%Y-%m-%d %H:%M:%S'))
             
             if 'DisconnectTimestamp' in contact:
                 names.append("DisconnectTimestamp")
-                values.append(contact['DisconnectTimestamp'].strftime('%Y-%m-%dT%H:%M:%SZ'))
+                local_time = contact['DisconnectTimestamp'].astimezone()
+                values.append(local_time.strftime('%Y-%m-%d %H:%M:%S'))
             
             if 'DisconnectReason' in contact:
                 names.append("DisconnectReason")
@@ -145,11 +144,22 @@ if st.button("更新"):
             
             st.session_state.df = pd.DataFrame({"Name": names, "Value": values})
             st.success("记录已更新！")
-            st.dataframe(st.session_state.df, hide_index=True)
         except Exception as e:
             st.error(f"更新失败: {str(e)}")
     else:
         st.warning("请先执行外呼操作")
+
+if 'df' in st.session_state:
+    st.dataframe(st.session_state.df, hide_index=True)
+
+if st.download_button(
+    label="导出",
+    data=st.session_state.df.to_csv(index=False).encode('utf-8') if 'df' in st.session_state else "",
+    file_name=f"contact_{st.session_state.get('contact_id', 'data')}.csv",
+    mime="text/csv",
+    disabled='df' not in st.session_state
+):
+    st.success("导出成功！")
 
 if st.button("加载通话"):
     if 'contact_id' in st.session_state:
